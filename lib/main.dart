@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bringVegitables(tk: 50);
+    bringVegetables(tk: 50);
     return MaterialApp(
       //home: HomePage(),
       themeMode: ThemeMode.light,
@@ -34,5 +34,5 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  bringVegitables({tk = 10}) {}
+  bringVegetables({tk = 10}) {}
 }

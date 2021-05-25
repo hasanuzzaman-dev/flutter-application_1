@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,15 +8,17 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var name = "";
+  var changeBtn = false;
+
   @override
   Widget build(BuildContext context) {
     return Material(
-        //color: Colors.blueAccent,
+      //color: Colors.blueAccent,
         child: SingleChildScrollView(
-      child: Column(children: [
-        Image.asset(
-          "assets/images/login.png",
-          fit: BoxFit.cover,
+          child: Column(children: [
+            Image.asset(
+              "assets/images/login.png",
+              fit: BoxFit.cover,
         ),
         SizedBox(
           height: 20.0,
@@ -58,12 +59,23 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
               ),
               InkWell(
-                onTap: () => Navigator.pushNamed(context, MyRoutes.homeRoute),
-                child: Container(
-                  width: 250,
+                //onTap: () => Navigator.pushNamed(context, MyRoutes.homeRoute),
+                onTap: () async {
+                  setState(() {
+                    changeBtn = true;
+                  });
+                  await Future.delayed(Duration(seconds: 1));
+                  Navigator.pushNamed(context, MyRoutes.homeRoute);
+                },
+                child: AnimatedContainer(
+                  duration: Duration(seconds: 1),
+                  width: changeBtn ? 45 : 250,
                   height: 45,
                   alignment: Alignment.center,
-                  child: Text(
+                  child: changeBtn ? Icon(
+                    Icons.done,
+                    color: Colors.white,
+                  ) : Text(
                     "Login",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
