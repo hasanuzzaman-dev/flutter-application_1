@@ -100,7 +100,29 @@ class CatalogItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 catalog.name.toString().text.bold.make(),
-                catalog.desc.toString().text.textStyle(context.captionStyle).make()
+                catalog.desc
+                    .toString()
+                    .text
+                    .textStyle(context.captionStyle!)
+                    .make(),
+                SizedBox(
+                  height: 10,
+                ),
+                ButtonBar(
+                  alignment: MainAxisAlignment.spaceBetween,
+                  buttonPadding: EdgeInsets.all(8),
+                  children: [
+                    '\$ ${catalog.price}'.text.bold.xl.make(),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: 'Buy'.text.make(),
+                      style: ElevatedButton.styleFrom(
+                        primary: MyTheme.darkBluishColor,
+                        shape: StadiumBorder(),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           ),
