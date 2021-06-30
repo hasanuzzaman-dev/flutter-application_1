@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/models/catelog.dart';
@@ -25,11 +26,11 @@ class _HomePageState extends State<HomePage> {
     var catalogJson = await rootBundle.loadString("assets/files/catalog.json");
     var decodeData = jsonDecode(catalogJson);
     var productsData = decodeData["products"];
-    CatelogModel.items = List.from(productsData)
+    CatalogModel.items = List.from(productsData)
         .map<Item>((item) => Item.fromMap(item))
         .toList();
 
-        print(CatelogModel.items.length);
+    print(CatalogModel.items.length);
 
     setState(() {});
   }
@@ -45,14 +46,18 @@ class _HomePageState extends State<HomePage> {
       drawer: MyDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: CatelogModel.items.length,
-          itemBuilder: (context, index) {
-            return ItemWidget(
-              item: CatelogModel.items[index],
-            );
-          },
-        ),
+        child: (CatalogModel.items.isNotEmpty)
+            ? ListView.builder(
+                itemCount: CatalogModel.items.length,
+                itemBuilder: (context, index) {
+                  return ItemWidget(
+                    item: CatalogModel.items[index],
+                  );
+                },
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
     );
   }
